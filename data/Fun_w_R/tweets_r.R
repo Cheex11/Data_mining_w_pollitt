@@ -3,7 +3,7 @@ library(devtools)
 
 library(twitteR)
 
-setup_twitter_oauth("#", "#")
+setup_twitter_oauth("", "")
 
 
 library(tm)

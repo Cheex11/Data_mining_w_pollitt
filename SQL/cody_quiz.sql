@@ -161,3 +161,24 @@ set average_bustle =
 	inner join sandbox_dev.dbo.cody_dm dm on b.frn_guserid = dm.frn_adminid
 where average_bustle is 
  group by b.frn_guserid
+
+
+ use sandbox_dev
+ select top 1 * from cody_dm
+
+
+
+select tenure,
+avg(cast (question5 as float)) 
+from cody_dm
+group by tenure
+having count(tenure) > 2
+order by tenure
+
+
+SELECT TOP 1 adminname FROM cody_dm		
+ORDER BY NEWID()
+
+
+
+

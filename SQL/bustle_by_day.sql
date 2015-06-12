@@ -1,55 +1,54 @@
 use go
 
-select top 20 * from bproject_comment
-
-
-
-select top 200 * from bproject 
-where owned_by = 1
-order by created_date desc
-
-
-
-select 
-datename(m,bustle_date)+' '+cast(datepart(d,bustle_date) as varchar) as DayMonth,
+--2015 EVERYONE ACTIVE
+SELECT 
+convert(varchar, bustle_date, 110),
 count(bustleid)
 from bustle b
 	join callmeasurement.dbo.leuseradmin lua 
 		on b.frn_guserid = lua.leuseradminid 
 where bustle_date > '20150101'
 	and lua.isactive = 'yes'
-	and lua.start_date < '20150415'
-group by datename(m,bustle_date)+' '+cast(datepart(d,bustle_date) as varchar)
-order by datename(m,bustle_date)+' '+cast(datepart(d,bustle_date) as varchar)
+group by convert(varchar, bustle_date, 110)
+order by convert(varchar, bustle_date, 110)
+
+--ONLY PEOPLE BEFORE 20150101
+SELECT 
+convert(varchar, bustle_date, 110),
+count(bustleid)
+from bustle b
+	join callmeasurement.dbo.leuseradmin lua 
+		on b.frn_guserid = lua.leuseradminid 
+where bustle_date > '20150101'
+	and lua.isactive = 'yes'
+	and lua.start_date < '20150101'
+group by convert(varchar, bustle_date, 110)
+order by convert(varchar, bustle_date, 110)
 
 
 
-select 
-datename(m,bustle_date)+' '+cast(datepart(d,bustle_date) as varchar) as DayMonth,
+--2014
+SELECT 
+convert(varchar, bustle_date, 110),
 count(bustleid)
 from bustle b
 	join callmeasurement.dbo.leuseradmin lua 
 		on b.frn_guserid = lua.leuseradminid 
 where bustle_date > '20140101'
-	and bustle_date < '20140610'
+	and bustle_date < '20140611'
+group by convert(varchar, bustle_date, 110)
+order by convert(varchar, bustle_date, 110)
+
+--2013
+SELECT 
+convert(varchar, bustle_date, 110),
+count(bustleid)
+from bustle b
+	join callmeasurement.dbo.leuseradmin lua 
+		on b.frn_guserid = lua.leuseradminid 
+where bustle_date > '20130101'
+	and bustle_date < '20130611'
 	and lua.isactive = 'yes'
-	and lua.start_date < '20150415'
-group by datename(m,bustle_date)+' '+cast(datepart(d,bustle_date) as varchar)
-order by datename(m,bustle_date)+' '+cast(datepart(d,bustle_date) as varchar)
-
-
-
-
-
-select top 1 * from callmeasurement.dbo.leuseradmin
-
-
-select top 1 * from bustle
-
-
-select count(bustleid) as bustle,
-datepart(month,bustle_date)
-from bustle
-where bustle_date < '20150602'
-group by datepart(month,bustle_date)
-order by datepart(month,bustle_date)
+	and lua.start_date < '20130415'
+group by convert(varchar, bustle_date, 110)
+order by convert(varchar, bustle_date, 110)
